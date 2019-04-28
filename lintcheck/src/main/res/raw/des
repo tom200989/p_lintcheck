@@ -1,0 +1,63 @@
+[PART 1: 需求]
+为规范化代码管理, 引入如下几种条件的自动检测, 检测不通过的, 业务代码不予以运行.
+框架管理人员可以利用该控件进行植入控制.
+
+[PART 2: 类说明]
+
+    <core>
+        CheckClassCore: 核心类
+        CheckClassProxy: 核心类代理(用于在混淆后不暴露核心类的方法)
+        GlobalVariable: 全局变量封装类
+        MethodVariable: 方法体封装类
+        
+    <helper>
+        LintHelper: 针对ma_hiber的中间类(框架管理人员你可以使用核心类进行二次封装)
+        LintWidget: 针对ma_hiber的UI类(框架管理人员你可以使用核心类进行二次封装)
+        
+    <utils>
+        Lgg: 日志辅助类
+
+[PART 3: 核心方法\变量说明]
+
+    <CheckClassCore.java>
+    
+        // 根据包名获取包名下所有的类
+        protected static List<Class> getAllClasss(String pkn)
+        
+        // 获取指定包下指定目标类的子类
+        protected static List<Class> getTargetClasss(String pkn, Class targetClass)
+        
+        // 获取指定类的全局变量集合
+        protected static List<GlobalVariable> getGlobalVariable(@Nullable Class targetClass)
+        
+        // 获取指定类的方法体集合
+        protected static List<MethodVariable> getMethodsBody(Class targetClass)
+    
+    <GlobalVariable.java>
+        
+        public int modifiers;   // 修饰域
+        public Class type;      // 类型
+        public String name;     // 变量名
+            
+    <MethodVariable.java>
+    
+        public int modifiers;       // 修饰域
+        public Class returnType;    // 返回类型
+        public String name;         // 方法名
+        public Class[] params;      // 传入参数数组
+
+[PART 4: 如何使用]
+本module提供了一个针对ma_hiber的lint检查业务机制, LintHelper以及LintWidget
+    <XML>
+        <com.lintcheck.lintcheck.helper.LintWidget
+            android:id = "@+id/wd_lint"
+            android:layout_height = "match_parent"
+            android:layout_width = "match_parent"/>
+        
+    <JAVA>
+        LintWidget lintWidget = findViewById(R.id.wd_lint);
+        List<Integer> lintcode = LintHelper.getLintResult(BuildConfig.APPLICATION_ID); // 获取到lint检查的结果码集合
+        lintWidget.setLintTip(lintcode);
+
+[PART 5: 注意事项]
+如果框架设计者需要重新利用core包下的类进行封装, 那么需要注意在android 9.0,即android P之后就不能使用, 所以必须做版本判断.
