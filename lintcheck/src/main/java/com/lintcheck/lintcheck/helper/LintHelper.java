@@ -212,7 +212,14 @@ public class LintHelper {
 
             // 0.2.是否存在规范外的目录
             if (arrLength > 3) {
+                Lgg.t(TAG).ii("file dir level :" + clazz.getName());
                 String level4Dir = arr[3];// 4级目录
+
+                // 0.2.1.过滤R2类
+                if (level4Dir.contains("R2")) {
+                    continue;
+                }
+                
                 boolean isAdapterDir = level4Dir.equalsIgnoreCase("adapter");
                 boolean isAppDir = level4Dir.equalsIgnoreCase("app");
                 boolean isBeanDir = level4Dir.equalsIgnoreCase("bean");
@@ -222,6 +229,7 @@ public class LintHelper {
                 boolean isUtilsDir = level4Dir.equalsIgnoreCase("utils");
                 boolean isWidgetDir = level4Dir.equalsIgnoreCase("widget");
                 boolean isWXDir = level4Dir.equalsIgnoreCase("wxapi");
+
                 if (!isAdapterDir & !isAppDir & !isBeanDir & !isHelperDir & !isTestDir & !isUeDir & !isUtilsDir & !isWidgetDir & !isWXDir) {
                     //Lgg.t(TAG).ee("规范外的目录: " + clazz.getName());
                     tempCodes.add(NOT_RULE_DIR_EXIST);
