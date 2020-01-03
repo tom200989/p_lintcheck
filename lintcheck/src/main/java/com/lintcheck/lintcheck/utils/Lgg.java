@@ -28,9 +28,9 @@ public class Lgg {
      * @return 本例对象
      */
     public static Lgg t(String tag) {
-        // Lgg.tag = tag;
+        Lgg.tag = tag;
         if (logs == null) {
-            synchronized (// Lgg.class) {
+            synchronized (Lgg.class) {
                 if (logs == null) {
                     logs = new Lgg();
                 }
