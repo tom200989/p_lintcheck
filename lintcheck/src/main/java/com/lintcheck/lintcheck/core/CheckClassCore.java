@@ -31,7 +31,6 @@ public class CheckClassCore {
         return excludeRJava(getTargetClasss(pkn, null));
     }
 
-
     /**
      * 获取: 指定包下--> 指定目标类的子类
      * 如: TestDialog extend Dialog
