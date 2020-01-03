@@ -73,6 +73,7 @@ public class LintHelper {
      */
     public static List<Integer> getLintResult(String pkn) {
         // Lgg.t(TAG).ii("Method--> " + LintHelper.class.getSimpleName() + ":getLintResult()--> pkn: " + pkn);
+        System.out.println("Lint is runinng");
         return getLintProxy(pkn);
     }
 
