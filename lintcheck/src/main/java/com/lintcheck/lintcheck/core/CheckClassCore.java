@@ -1,7 +1,8 @@
 package com.lintcheck.lintcheck.core;
 
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
