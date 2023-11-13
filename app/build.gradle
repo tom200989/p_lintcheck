@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    namespace 'com.p_lint.p_lint'
     compileSdk 34
     defaultConfig {
         applicationId "com.p_lint.p_lint"
@@ -15,7 +16,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    namespace 'com.p_lint.p_lint'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+
 }
 
 dependencies {
